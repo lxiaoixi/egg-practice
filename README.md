@@ -143,3 +143,23 @@ config
 
 ctx.logger
 this.logger
+
+## 参数获取
+
+ctx.query 
+ctx.queries
+   /posts?category=egg&id=1&id=2&id=3  
+
+   ctx.queries 会将相同的key的值放到一个数组中  id: [ '1', '2', '3' ]
+ctx.request.body
+ctx.params
+ctx.headers
+ctx.get(name):获取请求 header 中的一个字段的值
+ctx.ip
+ctx.cookies.get/set
+ctx.session
+
+## 参数校验
+
+ Validate 插件
+ https://github.com/eggjs/egg-validate

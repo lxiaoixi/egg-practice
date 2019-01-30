@@ -1,18 +1,18 @@
 'use strict';
 
-const Controller = require('egg').Controller;
+const Controller = require('./baseController');
 
 class NewsController extends Controller {
 
   async list() {
-    const ctx = this.ctx;
+    const { ctx, service, logger } = this; // ctx,app,service,logger,config
 
     const page = ctx.query.page || 1;
     const pageSize = ctx.query.pageSize || this.config.news.pageSize;
 
-    const list = await ctx.service.news.list(page, pageSize);
+    const list = await service.news.list(page, pageSize);
 
-    this.logger.info('list', list.length);
+    logger.info('list', list.length);
 
     await ctx.render('news/list', { list });
   }

@@ -8,5 +8,5 @@ module.exports = app => {
   const gzip = app.middleware.gzip({ threshold: 1024 });
 
   router.get('/', gzip, controller.home.index);
-  router.get('/news', controller.news.list);
+  require('./router/news.js')(app);
 };

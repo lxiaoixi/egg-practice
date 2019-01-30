@@ -13,6 +13,12 @@ module.exports = appInfo => {
     },
     // 中间件 middleware
     middleware: [ 'robot' ],
+
+    bodyParser: {
+      jsonLimit: '1mb',
+      formLimit: '1mb'
+    },
+
     // robot config
     robot: {
       ua: [
