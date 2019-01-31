@@ -9,6 +9,12 @@ const ejs = {
   package: 'egg-view-ejs'
 };
 
+const io = {
+  enable: true,
+  package: 'egg-socket.io'
+};
+
 module.exports = {
-  ejs
+  ejs,
+  io
 };

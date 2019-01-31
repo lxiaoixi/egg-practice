@@ -33,6 +33,20 @@ module.exports = appInfo => {
     news: {
       pageSize: 30,
       serverUrl: 'https://hn.algolia.com/api/v1'
+    },
+
+    io: {
+      init: { }, // passed to engine.io
+      namespace: {
+        '/haha': {
+          connectionMiddleware: [ 'message' ],
+          packetMiddleware: []
+        },
+        '/example': {
+          connectionMiddleware: [ 'message' ],
+          packetMiddleware: []
+        }
+      }
     }
   };
 };

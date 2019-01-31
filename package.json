@@ -6,6 +6,7 @@
     "dependencies": {
         "egg": "^2.2.1",
         "egg-scripts": "^2.5.0",
+        "egg-socket.io": "^4.1.5",
         "egg-view-ejs": "^2.0.0",
         "moment": "^2.24.0"
     },
@@ -26,7 +27,7 @@
     "scripts": {
         "start": "egg-scripts start --daemon --title=egg-server-egg-born",
         "stop": "egg-scripts stop --title=egg-server-egg-born",
-        "dev": "egg-bin dev",
+        "dev": "egg-bin dev --sticky",
         "debug": "egg-bin debug",
         "test": "npm run lint -- --fix && npm run test-local",
         "test-local": "egg-bin test",
