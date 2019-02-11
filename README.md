@@ -163,3 +163,70 @@ ctx.session
 
  Validate 插件
  https://github.com/eggjs/egg-validate
+
+## 路由分发
+
+使用egg-router-plus 路由前缀
+
+## 数据库 mysql  基于mysql
+
+* 开启插件
+```
+// config/plugin.js
+exports.mysql = {
+  enable: true,
+  package: 'egg-mysql',
+};
+```
+
+* 添加配置
+```
+// config/config.${env}.js
+exports.mysql = {
+  // 单数据库信息配置
+  client: {
+    // host
+    host: 'mysql.com',
+    // 端口号
+    port: '3306',
+    // 用户名
+    user: 'test_user',
+    // 密码
+    password: 'test_password',
+    // 数据库名
+    database: 'test',
+  },
+  // 是否加载到 app 上，默认开启
+  app: true,
+  // 是否加载到 agent 上，默认关闭
+  agent: false,
+};
+```
+
+* app.mysql;
+
+## redis  基于ioredis
+
+* 开启插件
+
+```
+exports.redis = {
+  enable: true,
+  package: 'egg-redis',
+};
+```
+
+* 添加配置
+
+```
+config.redis = {
+  client: {
+    port: 6379,          // Redis port
+    host: '127.0.0.1',   // Redis host
+    password: 'auth',
+    db: 0,
+  },
+}
+```
+
+* app.redis;

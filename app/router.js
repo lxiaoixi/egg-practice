@@ -10,6 +10,7 @@ module.exports = app => {
   router.get('/', gzip, controller.home.index);
   router.get('/ceshi', controller.home.ceshi);
   require('./router/news.js')(app);
+  require('./router/user.js')(app);
 
   io.of('/example').route('exchange', io.controller.nsp.exchange);
 };

@@ -14,7 +14,25 @@ const io = {
   package: 'egg-socket.io'
 };
 
+const routerPlus = {
+  enable: true,
+  package: 'egg-router-plus'
+};
+
+const mysql = {
+  enable: true,
+  package: 'egg-mysql'
+};
+
+const redis = {
+  enable: true,
+  package: 'egg-redis'
+};
+
 module.exports = {
   ejs,
-  io
+  io,
+  routerPlus,
+  mysql,
+  redis
 };

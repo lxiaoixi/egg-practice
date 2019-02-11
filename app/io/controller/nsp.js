@@ -2,13 +2,17 @@ const Controller = require('egg').Controller;
 
 class NspController extends Controller {
   async exchange() {
-    const { app, ctx } = this;
+    const { ctx } = this;
 
     const { socket, logger } = ctx;
-    logger.info('nsp controller');
 
-    socket.emit('haha', 'nsp controller');
+    // 接收信息
+    const message = ctx.args[0] || {};
+    logger.info('nsp controller', message);
 
+    logger.info('current socket', socket);
+
+    await socket.emit('res', `Hi! I've got your message: ${message}`);
 
   }
 }

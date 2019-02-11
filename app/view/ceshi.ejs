@@ -80,16 +80,12 @@
         log('#ceshi,', data);
   
       });
-       socket.on('haha', (data) => {
-       
-        log('#haha,', data);
-  
-      });
-       socket.on('xixi', (data) => {
-       
-        log('#xixi,', data);
-  
-      });
+
+      socket.emit('exchange',{ action:'ceshi',msg:{name:'xiaoxi'}});
+      
+      socket.on('res',msg => {
+        log('#exchange,', msg);
+      })
       // 接收在线用户信息
       socket.on('online', msg => {
         log('#online,', msg);

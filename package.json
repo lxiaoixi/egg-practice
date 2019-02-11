@@ -5,6 +5,9 @@
     "private": true,
     "dependencies": {
         "egg": "^2.2.1",
+        "egg-mysql": "^3.0.0",
+        "egg-redis": "^2.3.0",
+        "egg-router-plus": "^1.3.0",
         "egg-scripts": "^2.5.0",
         "egg-socket.io": "^4.1.5",
         "egg-view-ejs": "^2.0.0",
