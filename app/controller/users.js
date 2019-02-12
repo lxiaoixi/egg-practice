@@ -5,7 +5,7 @@ const Controller = require('./baseController');
 class UserController extends Controller {
 
   async list() {
-    const { ctx, service, logger, config } = this; // ctx,app,service,logger,config
+    const { ctx, service, logger, config, app } = this; // ctx,app,service,logger,config
 
     const page = ctx.query.page || 1;
     const pageSize = ctx.query.pageSize || config.news.pageSize;
@@ -13,6 +13,8 @@ class UserController extends Controller {
     const list = await service.users.list(page, pageSize);
 
     logger.info('list', list.length);
+
+    app.io.of('/').adapter.pubClient.publish('first channel', 'publish a message');
 
     this.response(200, list, '000000');
   }

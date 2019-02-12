@@ -46,6 +46,12 @@ module.exports = appInfo => {
           connectionMiddleware: [ 'message' ],
           packetMiddleware: []
         }
+      },
+      // cluster 模式下，通过 redis 实现数据共享
+      redis: {
+        host: '127.0.0.1',
+        port: 6379,
+        db: 10
       }
     },
 
@@ -70,10 +76,11 @@ module.exports = appInfo => {
     },
     redis: {
       client: {
-        port: 9701, // Redis port
-        host: '115.29.163.144', // Redis host
+        port: 6379, // Redis port
+        host: '127.0.0.1', // Redis host
         password: 'nMe_2o1701241438',
-        db: 10
+        db: 10,
+        keyPrefix: 'ioredis' // 设置redis 的key的前缀
       }
     }
   };

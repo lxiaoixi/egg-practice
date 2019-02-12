@@ -6,11 +6,12 @@ class NspController extends Controller {
 
     const { socket, logger } = ctx;
 
-    // 接收信息
+    // 接收客户端信息
     const message = ctx.args[0] || {};
+
     logger.info('nsp controller', message);
 
-    logger.info('current socket', socket);
+    // logger.info('current socket', socket);
 
     await socket.emit('res', `Hi! I've got your message: ${message}`);
 

@@ -230,3 +230,46 @@ config.redis = {
 ```
 
 * app.redis;
+
+## socketio 引入
+
+* 开启插件
+
+```
+const io = {
+  enable: true,
+  package: 'egg-socket.io'
+};
+```
+
+* 配置
+
+```
+io: {
+  init: { }, // passed to engine.io
+  namespace: { // 定义命名空间
+    '/haha': {
+      connectionMiddleware: [ 'message' ],
+      packetMiddleware: []
+    },
+    '/example': {
+      connectionMiddleware: [ 'message' ],
+      packetMiddleware: []
+    }
+  },
+  // cluster 模式下，通过 redis 实现数据共享
+  redis: {
+    host: '127.0.0.1',
+    port: 6379,
+    db: 10
+  }
+},
+```
+
+* 解释
+
+connectionMiddleware 定义连接中间件
+packetMiddleware  对消息做预处理，又或者是对加密消息的解密等操作
+Controller 是对客户端发送的event进行处理，相当于socket.on('eventName');
+Router 对客户端发送的event事件进行分发处理
+
