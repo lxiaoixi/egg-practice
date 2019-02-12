@@ -21,9 +21,7 @@ class UserService extends Service {
       offset: (page - 1) * pageSize
     });
 
-    logger.info('users', users);
     return users;
-
   }
 
   async add(user) {

@@ -11,34 +11,24 @@ module.exports = appInfo => {
       },
       defaultExtension: '.ejs'
     },
+
     // 中间件 middleware
-    middleware: [ 'robot' ],
+    middleware: [ 'gzip' ],
 
     bodyParser: {
       jsonLimit: '1mb',
       formLimit: '1mb'
     },
 
-    // robot config
-    robot: {
-      ua: [
-        /Baiduspider/i
-      ]
-    },
     // gzip config
     gzip: {
       threshold: 1024
-    },
-    // news config
-    news: {
-      pageSize: 10,
-      serverUrl: 'https://hn.algolia.com/api/v1'
     },
 
     io: {
       init: { }, // passed to engine.io
       namespace: { // 定义命名空间
-        '/haha': {
+        '/test': {
           connectionMiddleware: [ 'message' ],
           packetMiddleware: []
         },
@@ -54,7 +44,6 @@ module.exports = appInfo => {
         db: 10
       }
     },
-
     mysql: {
       // 单数据库信息配置
       client: {
@@ -82,6 +71,9 @@ module.exports = appInfo => {
         db: 10,
         keyPrefix: 'ioredis' // 设置redis 的key的前缀
       }
+    },
+    page: {
+      pageSize: 10
     }
   };
 };

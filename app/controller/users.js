@@ -8,11 +8,9 @@ class UserController extends Controller {
     const { ctx, service, logger, config, app } = this; // ctx,app,service,logger,config
 
     const page = ctx.query.page || 1;
-    const pageSize = ctx.query.pageSize || config.news.pageSize;
+    const pageSize = ctx.query.pageSize || config.page.pageSize;
 
     const list = await service.users.list(page, pageSize);
-
-    logger.info('csrf token', ctx.csrf);
 
     logger.info('list', list.length);
 

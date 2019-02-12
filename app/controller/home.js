@@ -7,8 +7,8 @@ class HomeController extends Controller {
     this.ctx.body = 'hi, egg';
   }
 
-  async ceshi() {
-    await this.ctx.render('ceshi', {});
+  async chat() {
+    await this.ctx.render('chat', {});
   }
 }
 
