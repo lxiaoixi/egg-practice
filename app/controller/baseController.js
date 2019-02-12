@@ -12,7 +12,7 @@ class BaseController extends Controller {
   response(statusCode, data, code = '000000') {
     const { ctx } = this;
     ctx.status = statusCode;
-    ctx.body = {
+    return ctx.body = {
       code,
       data
     };

@@ -4,11 +4,13 @@ class UserService extends Service {
   async list(page = 1, pageSize = 10) {
 
     const { app, logger } = this;
-    await app.redis.set('user', 'xiaoxi', 'px', 80000);
 
-    const mysql = app.mysql;
+    const { mysql, redis } = app;
 
-    const user = await app.redis.get('user');
+
+    await redis.set('user', 'xiaoxi', 'px', 80000);
+
+    const user = await redis.get('user');
     logger.info('redis user', user);
 
     const users = await mysql.select('users', {
@@ -27,7 +29,7 @@ class UserService extends Service {
   async add(user) {
     const { app } = this;
 
-    const mysql = app.mysql;
+    const { mysql } = app;
 
     await mysql.insert('users', user);
     return 'success';

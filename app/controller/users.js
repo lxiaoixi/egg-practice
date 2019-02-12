@@ -12,6 +12,8 @@ class UserController extends Controller {
 
     const list = await service.users.list(page, pageSize);
 
+    logger.info('csrf token', ctx.csrf);
+
     logger.info('list', list.length);
 
     app.io.of('/').adapter.pubClient.publish('first channel', 'publish a message');
