@@ -40,6 +40,7 @@
         "no-template-curly-in-string": 0,
         "object-curly-newline": 0,
         "no-undef": 0,
-        "camelcase": 0
+        "camelcase": 0,
+        "restParams": 0
     }
 }

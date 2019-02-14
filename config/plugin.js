@@ -29,10 +29,16 @@ const redis = {
   package: 'egg-redis'
 };
 
+const validate = {
+  enable: true,
+  package: 'egg-validate'
+};
+
 module.exports = {
   ejs,
   io,
   routerPlus,
   mysql,
-  redis
+  redis,
+  validate
 };

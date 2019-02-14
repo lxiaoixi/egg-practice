@@ -13,7 +13,7 @@ module.exports = appInfo => {
     },
 
     // 中间件 middleware
-    middleware: [ 'gzip' ],
+    middleware: [ 'gzip', 'signIn' ],
 
     bodyParser: {
       jsonLimit: '1mb',
@@ -23,6 +23,10 @@ module.exports = appInfo => {
     // gzip config
     gzip: {
       threshold: 1024
+    },
+
+    signIn: {
+      match: '/api/users/signIn'
     },
 
     io: {
@@ -56,7 +60,7 @@ module.exports = appInfo => {
         // 密码
         password: 'xiaoxi',
         // 数据库名
-        database: 'xiaoxi'
+        database: 'egg_practice'
       },
       // 是否加载到 app 上，默认开启
       app: true,
@@ -69,11 +73,15 @@ module.exports = appInfo => {
         host: '127.0.0.1', // Redis host
         password: 'nMe_2o1701241438',
         db: 10,
-        keyPrefix: 'ioredis' // 设置redis 的key的前缀
+        keyPrefix: 'egg_practice' // 设置redis 的key的前缀
       }
     },
     page: {
       pageSize: 10
+    },
+    jwt: {
+      secret: 'xiaoxi',
+      expiresIn: 432000
     }
   };
 };

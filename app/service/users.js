@@ -32,6 +32,47 @@ class UserService extends Service {
     await mysql.insert('users', user);
     return 'success';
   }
+
+  async captcha(phone) {
+    const { app, logger } = this;
+    const { redis } = app;
+
+    const code = Math.round(Math.random() * 9000 + 1000);
+    logger.info('the captcha code is', code);
+
+    // TODO 将验证码发送到手机
+    await redis.set(phone, code, 'ex', 60);
+    return code;
+  }
+
+  async checkIsExit(phone, email) {
+    const { app } = this;
+    const { mysql } = app;
+
+    const sqlStr = `SELECT * FROM user where phone = ?
+    UNION All SELECT * FROM user where email = ?`;
+    const values = [ phone, email ];
+
+    return await mysql.query(sqlStr, values);
+  }
+
+  async signIn(body) {
+    const { app, logger, ctx: { helper } } = this;
+    const { mysql } = app;
+
+    const user = Object.assign(body);
+    const salt = Math.round((new Date().valueOf() * Math.random())) + '';
+    const password = helper.cryptoPass(salt, user.password);
+    delete user.repassword;
+    delete user.code;
+    user.salt = salt;
+    user.password = password;
+    user.createAt = new Date();
+
+    logger.info('sign user is', user);
+
+    await mysql.insert('user', user);
+  }
 }
 
 module.exports = UserService;

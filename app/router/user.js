@@ -7,4 +7,7 @@ module.exports = app => {
 
   subRouter.get('/', controller.users.list);
   subRouter.post('/', controller.users.add);
+  subRouter.post('/signIn', controller.users.signIn);
+  subRouter.get('/captcha', controller.users.captcha);
+  subRouter.post('/login', controller.users.login);
 };
