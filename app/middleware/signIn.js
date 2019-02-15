@@ -19,7 +19,7 @@ module.exports = () => {
       code: { type: 'string', message: '请输入code' }
     });
 
-    // 校验验证码是否正确
+    // 校验短信验证码是否正确
     const realCode = await redis.get(phone);
     logger.info('real code is ', realCode);
 

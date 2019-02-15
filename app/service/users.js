@@ -13,15 +13,22 @@ class UserService extends Service {
     const user = await redis.get('user');
     logger.info('redis user', user);
 
-    const users = await mysql.select('users', {
+    const users = await mysql.select('user', {
       // where: { id: [ 1, 2 ] },
-      columns: [ 'username', 'password' ], // 要查询的表字段
+      columns: [ 'id', 'userName', 'nickName', 'email', 'phone', 'createAt' ], // 要查询的表字段
       orders: [[ 'username', 'desc' ], [ 'id', 'desc' ]], // 排序方式
       limit: pageSize, // 返回数据量
       offset: (page - 1) * pageSize
     });
 
-    return users;
+    const sum = await mysql.count('user');
+
+    return {
+      current: page,
+      total: sum,
+      pageSize: pageSize,
+      list: users
+    };
   }
 
   async add(user) {
@@ -41,7 +48,7 @@ class UserService extends Service {
     logger.info('the captcha code is', code);
 
     // TODO 将验证码发送到手机
-    await redis.set(phone, code, 'ex', 60);
+    await redis.set(phone, code, 'ex', 100);
     return code;
   }
 

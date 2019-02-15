@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const Captchapng = require('captchapng');
 const uuid = require('node-uuid');
 const jwt = require('jsonwebtoken');
+const Promise = require('bluebird');
 
 const response = (ctx, statusCode, data, code = '000000') => {
   ctx.status = statusCode;

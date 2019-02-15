@@ -126,7 +126,7 @@ module.exports = {
 ## 配置文件 config
 
 this.config
-
+app.config
 config
 |- config.default.js  // 默认的配置文件，所有环境都会加载这个配置文件
 |- config.prod.js

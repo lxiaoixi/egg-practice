@@ -4,6 +4,7 @@
     "description": "first egg project",
     "private": true,
     "dependencies": {
+        "bluebird": "^3.5.3",
         "captchapng": "0.0.1",
         "egg": "^2.2.1",
         "egg-mysql": "^3.0.0",

@@ -13,7 +13,7 @@ module.exports = appInfo => {
     },
 
     // 中间件 middleware
-    middleware: [ 'gzip', 'signIn' ],
+    middleware: [ 'gzip', 'signIn', 'authToken' ],
 
     bodyParser: {
       jsonLimit: '1mb',
@@ -27,6 +27,9 @@ module.exports = appInfo => {
 
     signIn: {
       match: '/api/users/signIn'
+    },
+    authToken: {
+      ignore: [ '/api/users/captcha', '/api/users/signIn', '/api/users/login' ]
     },
 
     io: {
