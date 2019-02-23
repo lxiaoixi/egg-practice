@@ -10,6 +10,7 @@ module.exports = app => {
   router.get('/chat', controller.home.chat);
 
   require('./router/user')(app);
+  require('./router/role')(app);
 
   require('./io/routes/index')(app);
 };
