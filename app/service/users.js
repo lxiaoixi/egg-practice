@@ -1,34 +1,24 @@
-const Service = require('egg').Service;
+const Service = require('./baseService');
 
 class UserService extends Service {
   async list(page = 1, pageSize = 10) {
 
     const { app, logger } = this;
-
-    const { mysql, redis } = app;
-
+    const { redis } = app;
 
     await redis.set('user', 'xiaoxi', 'px', 80000);
 
     const user = await redis.get('user');
     logger.info('redis user', user);
 
-    const users = await mysql.select('user', {
+    const options = {
       // where: { id: [ 1, 2 ] },
       columns: [ 'id', 'userName', 'nickName', 'email', 'phone', 'createAt' ], // 要查询的表字段
-      orders: [[ 'username', 'desc' ], [ 'id', 'desc' ]], // 排序方式
-      limit: pageSize, // 返回数据量
-      offset: (page - 1) * pageSize
-    });
-
-    const sum = await mysql.count('user');
-
-    return {
-      current: page,
-      total: sum,
-      pageSize: pageSize,
-      list: users
+      orders: [[ 'username', 'desc' ], [ 'id', 'desc' ]] // 排序方式
     };
+    const users = await this.pagination('user', options, page, pageSize);
+
+    return users;
   }
 
   async add(user) {
