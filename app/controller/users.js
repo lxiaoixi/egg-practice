@@ -16,7 +16,7 @@ class UserController extends Controller {
 
     app.io.of('/').adapter.pubClient.publish('first channel', 'publish a message');
 
-    this.response(200, list, '000000');
+    this.response(200, '000000', 'success', list);
   }
 
   async add() {
@@ -28,7 +28,7 @@ class UserController extends Controller {
 
     await service.users.add(body.user);
 
-    this.response(201, 'success', '000000');
+    this.response(201, '000000', 'success');
   }
 
   async signIn() {
@@ -41,12 +41,12 @@ class UserController extends Controller {
     const user = await service.users.checkIsExit(body.phone, body.email);
     logger.info('check user is exit', user);
     if (user.length > 0) {
-      return this.response(422, 'the user is exit', '111111');
+      return this.response(422, '111111', 'the user is exit');
     }
 
     await service.users.signIn(body);
 
-    this.response(201, 'success', '000000');
+    this.response(201, '000000', 'success');
   }
 
   async captcha() {
@@ -62,7 +62,7 @@ class UserController extends Controller {
     logger.info('csrf token is', ctx.csrf);
     await service.users.captcha(phone);
 
-    this.response(200, 'success', '000000');
+    this.response(200, '000000', 'success');
   }
 
   async login() {
@@ -74,12 +74,12 @@ class UserController extends Controller {
 
     const { username, password } = body;
     if (!username || !password) {
-      return this.response(422, 'please input username and password', '111111');
+      return this.response(422, '111111', 'please input username and password');
     }
     // 用户是否存在
     const users = await service.users.checkIsExit('', username);
     if (users.length === 0) {
-      return this.response(422, 'the user is not exit', '111111');
+      return this.response(422, '111111', 'the user is not exit');
     }
 
     const user = users[0];
@@ -88,14 +88,14 @@ class UserController extends Controller {
     const hash_password = ctx.helper.cryptoPass(user.salt, password);
 
     if (hash_password !== user.password) {
-      return this.response(422, 'the user password is not correct', '111111');
+      return this.response(422, '111111', 'the user password is not correct');
     }
 
     // JWT TOKEN
     const { jwt: { secret, expiresIn } } = config;
     const token = ctx.helper.sign({ id: user.id }, secret, { expiresIn });
 
-    this.response(201, { token }, '000000');
+    this.response(201, '000000', 'success', { token });
   }
 }
 

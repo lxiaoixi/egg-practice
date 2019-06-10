@@ -3,6 +3,7 @@
 module.exports = appInfo => {
   return {
     keys: appInfo.name + '_xiaoxi',
+
     // 模板引擎
     view: {
       defaultViewEngine: 'ejs',
@@ -12,8 +13,15 @@ module.exports = appInfo => {
       defaultExtension: '.ejs'
     },
 
+    // 修改启动配置。
+    cluster: {
+      listen: {
+        port: 5021
+      }
+    },
+
     // 中间件 middleware
-    middleware: [ 'gzip', 'signIn', 'authToken' ],
+    middleware: [ 'compress', 'signIn', 'authToken' ],
 
     bodyParser: {
       jsonLimit: '1mb',
@@ -21,7 +29,7 @@ module.exports = appInfo => {
     },
 
     // gzip config
-    gzip: {
+    compress: {
       threshold: 1024
     },
 
@@ -29,9 +37,10 @@ module.exports = appInfo => {
       match: '/api/users/signIn'
     },
     authToken: {
-      ignore: [ '/api/users/captcha', '/api/users/signIn', '/api/users/login' ]
+      ignore: [ '/api/users/captcha', '/api/users/signIn', '/api/users/login', '/api/users/list' ]
     },
 
+    // socketio
     io: {
       init: { }, // passed to engine.io
       namespace: { // 定义命名空间
@@ -51,6 +60,8 @@ module.exports = appInfo => {
         db: 10
       }
     },
+
+    // 插件配置
     mysql: {
       // 单数据库信息配置
       client: {
@@ -70,6 +81,7 @@ module.exports = appInfo => {
       // 是否加载到 agent 上，默认关闭
       agent: false
     },
+
     redis: {
       client: {
         port: 6379, // Redis port
@@ -79,12 +91,26 @@ module.exports = appInfo => {
         keyPrefix: 'egg_practice' // 设置redis 的key的前缀
       }
     },
+
+    // 自定义配置
     page: {
       pageSize: 10
     },
     jwt: {
       secret: 'xiaoxi',
       expiresIn: 432000
+    },
+    //多出来的配置==========
+    security: {
+      csrf: {
+        enable: false,
+        ignoreJSON: true
+      },
+      domainWhiteList: [ 'http://localhost:10086' ]
+    },
+    cors: {
+      origin: '*',
+      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
     }
   };
 };

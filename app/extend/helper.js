@@ -5,10 +5,11 @@ const uuid = require('node-uuid');
 const jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
 
-const response = (ctx, statusCode, data, code = '000000') => {
+const response = (ctx, statusCode, code = '000000', message, data) => {
   ctx.status = statusCode;
   return ctx.body = {
     code,
+    message,
     data
   };
 };

@@ -273,6 +273,31 @@ packetMiddleware  对消息做预处理，又或者是对加密消息的解密�
 Controller 是对客户端发送的event进行处理，相当于socket.on('eventName');
 Router 对客户端发送的event事件进行分发处理
 
+## 跨域
+
+1. npm i egg-cors --save
+2. 在plugin.js中设置开启cors
+  ```
+  exports.cors = {
+    enable: true,
+    package: 'egg-cors',
+  };
+  ```
+3. 在config.default.js中配置
+  ```
+  config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true
+    },
+    domainWhiteList: ['http://localhost:8080']
+  };
+  config.cors = {
+    origin:'*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  };
+  ```
+
 
 ## 接口文档
 

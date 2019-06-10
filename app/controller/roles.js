@@ -9,18 +9,18 @@ class RoleController extends Controller {
     logger.info('add role', data);
 
     if (!data.name) {
-      return this.response(422, 'role name is null', '111111');
+      return this.response(422, '111111', 'role name is null');
     }
 
     const role = await service.roles.checkIsExit(data.name);
 
     if (role) {
-      return this.response(422, 'role is exit', '111111');
+      return this.response(422, '111111', 'role is exit');
     }
 
     await service.roles.add(data);
 
-    this.response(201, 'success', '000000');
+    this.response(201, '000000', 'success');
   }
 
   async list() {
@@ -30,7 +30,7 @@ class RoleController extends Controller {
     logger.info('get role list query', data);
 
     const roles = await service.roles.list(data);
-    this.response(200, roles, '000000');
+    this.response(200, '000000', 'success', roles);
   }
 }
 

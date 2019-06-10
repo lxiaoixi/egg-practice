@@ -27,7 +27,7 @@ module.exports = () => {
       redis.del(phone);
       await next();
     } else {
-      return helper.response(ctx, 401, '验证码不正确', '111111');
+      return helper.response(ctx, 401, '111111', '验证码不正确');
     }
   };
 };

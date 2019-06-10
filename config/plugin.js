@@ -34,11 +34,17 @@ const validate = {
   package: 'egg-validate'
 };
 
+const cors = {
+  enable: true,
+  package: 'egg-cors',
+};
+
 module.exports = {
   ejs,
   io,
   routerPlus,
   mysql,
   redis,
-  validate
+  validate,
+  cors
 };
